@@ -6,6 +6,7 @@ import { FormsModule, NgModel } from '@angular/forms';
 
 @Component({
   selector: 'app-product-form',
+  standalone: true,
   imports: [CommonModule, RouterModule, FormsModule],
   templateUrl: './product-form.component.html',
   styleUrls: ['./product-form.component.css']
