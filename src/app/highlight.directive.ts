@@ -1,12 +1,17 @@
-import { Directive, ElementRef, Input, Renderer2 } from '@angular/core';
+import { Directive, ElementRef, Input, OnChanges } from '@angular/core';
 
 @Directive({
   selector: '[appHighlight]'
 })
-export class HighlightDirective {
-  @Input() set appHighlight(condition: boolean) {
-    this.renderer.setStyle(this.el.nativeElement, 'backgroundColor', condition ? 'yellow' : 'transparent');
-  }
 
-  constructor(private el: ElementRef, private renderer: Renderer2) {}
+export class HighlightDirective implements OnChanges {
+  @Input() appHighlight!: boolean;
+
+  constructor(private el: ElementRef) {}
+
+  ngOnChanges() {
+    this.el.nativeElement.style.backgroundColor = this.appHighlight
+      ? 'lightgreen'
+      : 'lightcoral';
+  }
 }

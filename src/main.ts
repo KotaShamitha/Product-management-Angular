@@ -5,7 +5,7 @@ import { AppComponent } from './app/app.component';
 
 bootstrapApplication(AppComponent, {
   providers: [
-    provideRouter(routes), // Replacing AppRoutingModule with standalone routing configuration
+    provideRouter(routes), 
   ],
 })
 .catch(err => console.error(err));

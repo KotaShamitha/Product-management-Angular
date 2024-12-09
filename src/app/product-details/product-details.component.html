@@ -1,5 +1,15 @@
-<div *ngIf="product">
-    <h2>{{ product.name }}</h2>
-    <p>Status: {{ product.available ? 'Available' : 'Out of Stock' }}</p>
-    <a [routerLink]="['/edit-product', product.id]">Edit Product</a>
+<div class="product-details-container" *ngIf="product">
+    <div class="product-card">
+        <h2 class="product-name">{{ product.name }}</h2>
+        <p class="product-status">
+            Status:
+            <span [ngClass]="{ 'available': product.available, 'out-of-stock': !product.available }">
+                {{ product.available ? 'Available' : 'Out of Stock' }}
+            </span>
+        </p>
+        <p class="product-description">{{ product.description || 'No description available.' }}</p>
+        <div class="product-actions">
+            <a [routerLink]="['/edit-product', product.id]" class="edit-button">Edit Product</a>
+        </div>
+    </div>
 </div>

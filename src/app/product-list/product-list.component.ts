@@ -1,49 +1,36 @@
-// import { Component, OnInit } from '@angular/core';
-// import { ProductService, Product } from '../product.service';
-// import { CommonModule } from '@angular/common';
-// import { HighlightDirective } from '../highlight.directive';
-// import { RouterModule } from '@angular/router';
-// import { InMemoryDataService } from '../services/in-memory-data.service';
-
-// @Component({
-//   selector: 'app-product-list',
-//   standalone: true,
-//   imports: [CommonModule, HighlightDirective, RouterModule],
-//   templateUrl: './product-list.component.html',
-//   styleUrls: ['./product-list.component.css']
-// })
-// export class ProductListComponent implements OnInit {
-//   products: Product[] = [];
-
-//   constructor(private productService: InMemoryDataService) {}
-
-//   ngOnInit(): void {
-//     this.productService.getProducts().subscribe(products => this.products = products);
-//   }
-// }
-
-
-// src/app/product-list/product-list.component.ts
-import { Component, OnInit } from '@angular/core';
-import { InMemoryDataService } from '../services/in-memory-data.service'; // Ensure correct import
+import { Component } from '@angular/core';
+import { ProductService, Product } from '../product.service';
 import { CommonModule } from '@angular/common';
-import { HighlightDirective } from '../highlight.directive'; // Assuming this directive is defined
-import { RouterModule } from '@angular/router';
-import { Product } from '../product.service'; // Ensure Product interface is imported
+import { Router, RouterLink } from '@angular/router';
+import { InMemoryDataService } from '../services/in-memory-data.service';
+
 
 @Component({
   selector: 'app-product-list',
-  standalone: true,
-  imports: [CommonModule, HighlightDirective, RouterModule],
   templateUrl: './product-list.component.html',
-  styleUrls: ['./product-list.component.css']
+  standalone: true,
+  imports: [CommonModule,RouterLink],
 })
-export class ProductListComponent implements OnInit {
-  products: Product[] = [];
+export class ProductListComponent {
+  products: { id: number, name: string, available: boolean, description: string }[] = [];
 
-  constructor(private productService: InMemoryDataService) {} // Use InMemoryDataService here
+  constructor(private productService: InMemoryDataService, private router: Router) {
+    // Initially load the products from the service
+    this.loadProducts();
+  }
 
-  ngOnInit(): void {
-    this.products = this.productService.createDb().products; // Directly access products
+  loadProducts(): void {
+    this.products = this.productService.getProducts();
+  }
+
+  editProduct(productId: number): void {
+    // Navigate to the edit form with the product ID
+    this.router.navigate(['/edit-product', productId]);
+  }
+
+  deleteProduct(productId: number): void {
+    // Remove the product with the given ID from the local array
+    this.productService.deleteProduct(productId);
+    this.loadProducts();  // Refresh the product list after deletion
   }
 }
