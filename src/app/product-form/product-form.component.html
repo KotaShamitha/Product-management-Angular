@@ -1,0 +1,11 @@
+<h2>{{ isEditMode ? 'Edit Product' : 'Add Product' }}</h2>
+<form (ngSubmit)="saveProduct()">
+    <label for="name">Product Name:</label>
+    <input id="name" [(ngModel)]="product.name" name="name" required>
+
+    <label for="available">Available:</label>
+    <input type="checkbox" id="available" [(ngModel)]="product.available" name="available">
+
+    <button type="submit">{{ isEditMode ? 'Update' : 'Create' }}</button>
+</form>
+<a routerLink="/products">Cancel</a>

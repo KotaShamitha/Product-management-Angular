@@ -1,0 +1,5 @@
+<div *ngIf="product">
+    <h2>{{ product.name }}</h2>
+    <p>Status: {{ product.available ? 'Available' : 'Out of Stock' }}</p>
+    <a [routerLink]="['/edit-product', product.id]">Edit Product</a>
+</div>

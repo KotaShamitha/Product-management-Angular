@@ -1,0 +1,12 @@
+li {
+  list-style-type: none;
+  margin: 5px 0;
+}
+
+.available {
+  color: green;
+}
+
+.out-of-stock {
+  color: red;
+}
