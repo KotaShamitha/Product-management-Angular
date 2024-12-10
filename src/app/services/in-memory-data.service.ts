@@ -1,7 +1,4 @@
-import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { Injectable } from '@angular/core';
-import { Product } from '../product.service';
-
 @Injectable({
   providedIn: 'root'
 })

@@ -1,25 +1,18 @@
-<div class="product-list">
-    <div *ngFor="let product of products" class="product-card">
-        <div class="status-icon">
-            <span *ngIf="product.available" class="available">🟢</span>
-            <span *ngIf="!product.available" class="out-of-stock">🔴</span>
-        </div>
-
+<div class="product-cards">
+    <div class="product-card" *ngFor="let product of products">
         <div class="product-details">
             <h3>{{ product.name }}</h3>
-            <p class="product-status">{{ product.available ? 'In Stock' : 'Out of Stock' }}</p>
+            <p class="product-status" [ngClass]="{ 'out-of-stock': !product.available }">
+                {{ product.available ? 'In Stock' : 'Out of Stock' }}
+            </p>
             <p class="product-description">{{ product.description || 'No description available.' }}</p>
         </div>
-
         <div class="product-actions">
-            <!-- Edit Button -->
-            <button (click)="editProduct(product.id)" class="action-button edit-button">Edit</button>
-
-            <!-- Delete Button -->
-            <button (click)="deleteProduct(product.id)" class="action-button delete-button">Delete</button>
-
-            <!-- Product Details Button -->
-            <button [routerLink]="['/products', product.id]" class="action-button details-button">View Details</button>
+            <button (click)="editProduct(product.id)" class="action-button">Edit</button>
+            <button (click)="deleteProduct(product.id)" class="action-button delete">Delete</button>
+            <button [routerLink]="['/products', product.id]" class="action-button details">
+                View Details
+            </button>
         </div>
     </div>
 </div>

@@ -2,29 +2,29 @@
     <h2>{{ product.id ? 'Edit' : 'Add' }} Product</h2>
 
     <form (ngSubmit)="saveProduct()">
-        <!-- Product Name Field -->
-        <label for="name">Product Name:</label>
-        <input id="name" [(ngModel)]="product.name" name="name" required placeholder="Enter product name"
-            #productName="ngModel" />
-        <div *ngIf="productName.invalid && productName.touched" class="error">
-            Product Name is required!
+        <div class="form-row">
+            <!-- Product Name Field -->
+            <label for="name">Product Name:</label>
+            <input id="name" [(ngModel)]="product.name" name="name" required placeholder="Enter product name"
+                #productName="ngModel" />
+            <div *ngIf="productName.invalid && productName.touched" class="error">
+                Product Name is required!
+            </div>
+
+            <div class="form-field">
+                <!-- Available Checkbox -->
+                <label for="available">Available:</label>
+                <input id="available" type="checkbox" [(ngModel)]="product.available" name="available" />
+            </div>
+            <!-- Product Description Field -->
+            <label for="description">Description:</label>
+            <textarea id="description" [(ngModel)]="product.description" name="description"
+                placeholder="Enter product description"></textarea>
+
+            <!-- Submit Button -->
+            <button type="submit" [disabled]="productName.invalid">
+                {{ product.id ? 'Update' : 'Add' }} Product
+            </button>
         </div>
-
-        <!-- Available Checkbox -->
-        <label for="available">Available:</label>
-        <input id="available" type="checkbox" [(ngModel)]="product.available" name="available" />
-
-        <!-- Product Description Field -->
-        <label for="description">Description:</label>
-        <textarea id="description" [(ngModel)]="product.description" name="description"
-            placeholder="Enter product description"></textarea>
-
-        <!-- Submit Button -->
-        <button type="submit" [disabled]="productName.invalid">
-            {{ product.id ? 'Update' : 'Add' }} Product
-        </button>
     </form>
-
-    <!-- Optional: Handle Delete -->
-    <!-- <button *ngIf="product.id" (click)="onDelete()">Delete</button> -->
 </div>
